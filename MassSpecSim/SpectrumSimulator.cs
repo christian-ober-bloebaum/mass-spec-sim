@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace MassSpecSim
 {
@@ -11,10 +12,21 @@ namespace MassSpecSim
 
         public double[] CreateMassAxis(SimulationSettings settings)
         {
-            // TODO 1: Erzeuge PointCount gleichmäßig verteilte m/z-Werte.
+            // 1: Erzeuge PointCount gleichmäßig verteilte m/z-Werte.
             // Der erste Wert ist MinimumMass, der letzte MaximumMass.
-            // Vor dem Programmieren: Beispiel mit Minimum=100, Maximum=104, Anzahl=5 aufschreiben.
-            throw new NotImplementedException("Aufgabe 1: Ergänze zuerst CreateMassAxis in SpectrumSimulator.cs.");
+
+            double [] result = new double[settings.PointCount];
+            double delta = (settings.MaximumMass - settings.MinimumMass) / (settings.PointCount - 1);
+            for(int i = 0; i < result.Length; i++)
+            {
+                if (i == 0) 
+                { 
+                    result[i] = settings.MinimumMass;
+                    continue;
+                }
+                result[i] = result[i-1] + delta;
+            }
+            return result;
         }
 
         public List<MeasurementPoint> Generate(SimulationSettings settings)

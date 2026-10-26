@@ -45,7 +45,7 @@ namespace MassSpecSim
 
         private void GenerateButton_Click(object sender, RoutedEventArgs e)
         {
-            SimulationSettings? settings = ReadSettings();
+            SimulationSettings? settings = ReadSettings(); 
             if (settings == null)
             {
                 return;

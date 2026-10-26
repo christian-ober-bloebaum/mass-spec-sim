@@ -27,7 +27,7 @@ namespace MassSpecSim
             // Die wichtigsten ScottPlot-Aufrufe: leeren, Daten hinzufügen, beschriften, neu zeichnen.
             plot.Plot.Clear();
             ScottPlot.Plottables.Scatter line = plot.Plot.Add.Scatter(masses, intensities);
-            line.MarkerSize = 0;
+            line.MarkerSize = 5;
             line.LineWidth = 2;
             plot.Plot.Title(title);
             plot.Plot.XLabel("m/z");
