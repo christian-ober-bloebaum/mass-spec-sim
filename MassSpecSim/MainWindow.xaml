@@ -1,0 +1,158 @@
+<Window x:Class="MassSpecSim.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ScottPlot="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF"
+        Title="Massenspektrum-Simulator · Lernprojekt"
+        Width="1150" Height="820" MinWidth="940" MinHeight="680"
+        WindowStartupLocation="CenterScreen" Language="de-DE"
+        FontFamily="Segoe UI" FontSize="14"
+        Foreground="#173247" Background="#F1F5F8">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="8,6" />
+            <Setter Property="Margin" Value="0,4,0,12" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="10,8" />
+            <Setter Property="Margin" Value="0,0,0,8" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="0,0,0,20">
+            <TextBlock Text="Massenspektrum-Simulator" FontSize="28" FontWeight="SemiBold" />
+            <TextBlock Text="Von einzelnen Datenpunkten zum simulierten Spektrum" Foreground="#526C80" Margin="0,5,0,0" />
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="290" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Background="White" Padding="16" CornerRadius="6">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Margin="0,0,8,0">
+                        <TextBlock Text="PARAMETER" FontWeight="Bold" Foreground="#147D82" Margin="0,0,0,14" />
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="m/z von" />
+                                <TextBox x:Name="MinimumMassBox" Text="100" AutomationProperties.Name="Minimum m/z" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="m/z bis" />
+                                <TextBox x:Name="MaximumMassBox" Text="600" AutomationProperties.Name="Maximum m/z" />
+                            </StackPanel>
+                        </Grid>
+
+                        <TextBlock Text="Anzahl Datenpunkte" />
+                        <TextBox x:Name="PointCountBox" Text="1001" AutomationProperties.Name="Anzahl Datenpunkte" />
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Peakposition" />
+                                <TextBox x:Name="PeakPositionBox" Text="300" AutomationProperties.Name="Peakposition m/z" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Peakbreite σ" />
+                                <TextBox x:Name="PeakWidthBox" Text="5" AutomationProperties.Name="Peakbreite Sigma" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Peakhöhe" />
+                                <TextBox x:Name="PeakHeightBox" Text="1000" AutomationProperties.Name="Peakhöhe" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Rauschen" />
+                                <TextBox x:Name="NoiseAmplitudeBox" Text="0" AutomationProperties.Name="Rauschamplitude" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Button x:Name="GenerateButton" Content="Spektrum erzeugen"
+                                ToolTip="Aufgaben 1 bis 3 in SpectrumSimulator.cs"
+                                Background="#147D82" Foreground="White" Margin="0,6,0,8"
+                                Click="GenerateButton_Click" />
+                        <Button x:Name="ExampleButton" Content="Beispieldaten anzeigen" Click="ExampleButton_Click" />
+                        <Button x:Name="AnalyzeButton" Content="Höchsten Punkt finden"
+                                ToolTip="Aufgabe 4 in SpectrumAnalysis.cs" Click="AnalyzeButton_Click" />
+                        <Button x:Name="ExportButton" Content="CSV speichern"
+                                ToolTip="Aufgabe 5 in SpectrumCsv.cs" Click="ExportButton_Click" />
+
+                        <TextBlock FontSize="12" Foreground="#526C80" Margin="0,8,0,0"
+                                   Text="Die Parameter gelten erst für deine Simulation. Die festen Beispieldaten bleiben davon unabhängig. Komma und Punkt sind als Dezimalzeichen erlaubt." />
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Border Background="#DEEEEE" Padding="12" CornerRadius="6" Margin="0,0,0,12">
+                    <StackPanel>
+                        <TextBlock x:Name="SourceText" Text="Feste Beispieldaten" FontWeight="SemiBold" />
+                        <TextBlock x:Name="PointCountText" Text="" Foreground="#526C80" Margin="0,3,0,0" />
+                    </StackPanel>
+                </Border>
+
+                <TabControl Grid.Row="1">
+                    <TabItem Header="Spektrum">
+                        <ScottPlot:WpfPlot x:Name="SpectrumPlot" Margin="8" />
+                    </TabItem>
+                    <TabItem Header="Messwerte">
+                        <DataGrid x:Name="PointsTable" AutoGenerateColumns="False" IsReadOnly="True"
+                                  CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column"
+                                  EnableRowVirtualization="True" Margin="8">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="m/z" Binding="{Binding MassToCharge, StringFormat=F3}" Width="*" />
+                                <DataGridTextColumn Header="Intensität (a.u.)" Binding="{Binding Intensity, StringFormat=F2}" Width="*" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                </TabControl>
+
+                <Border Grid.Row="2" Background="White" Padding="12" CornerRadius="6" Margin="0,12,0,0">
+                    <TextBlock x:Name="AnalysisText" Text="Höchster Datenpunkt: noch nicht ausgewertet (Aufgabe 4)." />
+                </Border>
+            </Grid>
+        </Grid>
+
+        <StackPanel Grid.Row="2" Margin="0,14,0,0">
+            <TextBlock x:Name="StatusText" Text="Bereit. Das Diagramm zeigt feste Beispieldaten." FontWeight="SemiBold" />
+            <TextBlock Text="Lernmodell · Synthetische Daten · Keine Geräteverbindung" Foreground="#526C80" FontSize="12" Margin="0,5,0,0" />
+        </StackPanel>
+    </Grid>
+</Window>
