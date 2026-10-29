@@ -7,8 +7,12 @@ namespace MassSpecSim
     {
         public static double Gaussian(double massToCharge, double position, double height, double width)
         {
+
             if (!double.IsFinite(width) || width <= 0)
             {
+                
+                
+                
                 throw new ArgumentOutOfRangeException(nameof(width), "Die Peakbreite muss positiv und endlich sein.");
             }
 

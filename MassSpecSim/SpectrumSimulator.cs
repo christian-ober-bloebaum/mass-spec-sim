@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Windows;
+using System.Windows.Media.Converters;
 
 namespace MassSpecSim
 {
@@ -33,20 +35,34 @@ namespace MassSpecSim
         {
             double[] massValues = CreateMassAxis(settings);
             List<MeasurementPoint> points = new List<MeasurementPoint>();
-
             // TODO 2: Durchlaufe massValues, berechne jeweils die Intensität mit PeakMath.Gaussian
             // und füge einen MeasurementPoint hinzu. Liste und Achse müssen gleich viele Werte haben.
-            // TODO 3: Ergänze später das Rauschen über CreateNoise.
+            for(int i = 0; i < massValues.Length; i++)
+            {
+                var x = massValues[i];
+                var y = PeakMath.Gaussian(x, settings.PeakPosition, settings.PeakHeight, settings.PeakWidth);
+                double noise = CreateNoise(settings.NoiseAmplitude);
+                points.Add(new MeasurementPoint(x, y + noise));
+            }
 
+            // TODO 3: Ergänze später das Rauschen über CreateNoise.
             return points;
         }
 
         public double CreateNoise(double amplitude)
         {
+
+            if (amplitude <= 0)
+            {
+                return 0;
+
+            }
+            return random.NextDouble() * amplitude ;
             // TODO 3: Nutze random.NextDouble() für einen Wert zwischen 0 und amplitude.
             // Bei amplitude = 0 muss das Ergebnis immer 0 sein.
             // Es genügt für diese Übung, nichtnegatives, gleichverteiltes Rauschen zu erzeugen.
-            throw new NotImplementedException("Aufgabe 3: Ergänze CreateNoise in SpectrumSimulator.cs.");
+
+
         }
     }
 }
