@@ -19,10 +19,10 @@ namespace MassSpecSim
             points.Add(new MeasurementPoint(210, 100));
             points.Add(new MeasurementPoint(215, 0));
             points.Add(new MeasurementPoint(300, 0));
-            points.Add(new MeasurementPoint(385, 0));
+            points.Add(new MeasurementPoint(385, 1200));
             points.Add(new MeasurementPoint(395, 300));
-            points.Add(new MeasurementPoint(400, 650));
-            points.Add(new MeasurementPoint(405, 300));
+            points.Add(new MeasurementPoint(400, 0));
+            points.Add(new MeasurementPoint(405, 00));
             points.Add(new MeasurementPoint(415, 0));
             points.Add(new MeasurementPoint(500, 0));
             points.Add(new MeasurementPoint(600, 0));
