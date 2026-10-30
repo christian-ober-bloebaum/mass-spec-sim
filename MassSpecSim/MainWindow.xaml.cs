@@ -15,6 +15,7 @@ namespace MassSpecSim
         private readonly SpectrumChart chart;
         private List<MeasurementPoint> currentSpectrum = new List<MeasurementPoint>();
 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -27,6 +28,8 @@ namespace MassSpecSim
             ShowSpectrum(ExampleSpectrum.Create(), "Feste Beispieldaten – keine Simulation");
             StatusText.Text = "Beispieldaten geladen. Beginne mit Aufgabe 0 in docs/Aufgaben.md.";
         }
+
+
 
         private void ShowSpectrum(List<MeasurementPoint> points, string source)
         {
@@ -168,6 +171,7 @@ namespace MassSpecSim
             settings.PeakHeight = height;
             settings.PeakWidth = width;
             settings.NoiseAmplitude = noise;
+
  
             return settings;
         }

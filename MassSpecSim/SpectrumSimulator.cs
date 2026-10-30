@@ -1,14 +1,18 @@
+using ScottPlot;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Windows;
 using System.Windows.Media.Converters;
+using static MassSpecSim.MainWindow;
 
 namespace MassSpecSim
 {
+
     // Hier entstehen die Messdaten. Diese Klasse kennt keine Fenster und Diagramme.
     public class SpectrumSimulator
     {
+
         // Für Aufgabe 3: Dieses Objekt kann bei jedem Aufruf einen neuen Zufallswert liefern.
         private readonly Random random = new Random();
 
@@ -30,6 +34,16 @@ namespace MassSpecSim
             }
             return result;
         }
+        public List<PeakDefinition> peaks = new List<PeakDefinition>()
+        {
+
+
+
+
+
+        
+        
+        };
 
         public List<MeasurementPoint> Generate(SimulationSettings settings)
         {
@@ -41,10 +55,14 @@ namespace MassSpecSim
             for(int i = 0; i < massValues.Length; i++)
             {
                 var x = massValues[i];
-                var y = PeakMath.Gaussian(x, settings.PeakPosition, settings.PeakHeight, settings.PeakWidth);
-                var y2 = PeakMath.Gaussian(x,settings.PeakPosition + 20, settings.PeakHeight/3, settings.PeakWidth*2);
+                var y = 0d;
+                // gehe über alle peaks, summiere intensitäten in y
+                foreach(var peak in settings.Peaks)
+                {
+                    y += PeakMath.Gaussian(x, peak.Position, peak.Height, peak.Width);
+                }
                 double noise = CreateNoise(settings.NoiseAmplitude);
-                points.Add(new MeasurementPoint(x, y + y2 + noise));
+                points.Add(new MeasurementPoint(x, y + noise));
             }
 
             // TODO 3: Ergänze später das Rauschen über CreateNoise.
