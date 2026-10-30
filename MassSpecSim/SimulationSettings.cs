@@ -10,5 +10,7 @@ namespace MassSpecSim
         public double PeakHeight { get; set; } = 1000;
         public double PeakWidth { get; set; } = 5;
         public double NoiseAmplitude { get; set; } = 0;
+
+
     }
 }

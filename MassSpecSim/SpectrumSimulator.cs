@@ -37,12 +37,14 @@ namespace MassSpecSim
             List<MeasurementPoint> points = new List<MeasurementPoint>();
             // TODO 2: Durchlaufe massValues, berechne jeweils die Intensität mit PeakMath.Gaussian
             // und füge einen MeasurementPoint hinzu. Liste und Achse müssen gleich viele Werte haben.
+            
             for(int i = 0; i < massValues.Length; i++)
             {
                 var x = massValues[i];
                 var y = PeakMath.Gaussian(x, settings.PeakPosition, settings.PeakHeight, settings.PeakWidth);
+                var y2 = PeakMath.Gaussian(x,settings.PeakPosition + 20, settings.PeakHeight/3, settings.PeakWidth*2);
                 double noise = CreateNoise(settings.NoiseAmplitude);
-                points.Add(new MeasurementPoint(x, y + noise));
+                points.Add(new MeasurementPoint(x, y + y2 + noise));
             }
 
             // TODO 3: Ergänze später das Rauschen über CreateNoise.

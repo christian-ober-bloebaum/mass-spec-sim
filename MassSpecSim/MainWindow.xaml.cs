@@ -38,6 +38,7 @@ namespace MassSpecSim
             AnalysisText.Text = "Höchster Datenpunkt: noch nicht ausgewertet (Aufgabe 4).";
         }
 
+
         private void ExampleButton_Click(object sender, RoutedEventArgs e)
         {
             ShowExample();
@@ -134,7 +135,9 @@ namespace MassSpecSim
                 || !TryReadNumber(PeakPositionBox, out double position)
                 || !TryReadNumber(PeakHeightBox, out double height)
                 || !TryReadNumber(PeakWidthBox, out double width)
-                || !TryReadNumber(NoiseAmplitudeBox, out double noise))
+                || !TryReadNumber(NoiseAmplitudeBox, out double noise)
+
+                )
             {
                 StatusText.Text = "Bitte gültige, endliche Zahlen eingeben. Die Anzahl muss eine ganze Zahl sein.";
                 return null;
@@ -165,6 +168,7 @@ namespace MassSpecSim
             settings.PeakHeight = height;
             settings.PeakWidth = width;
             settings.NoiseAmplitude = noise;
+ 
             return settings;
         }
 
