@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace MassSpecSim
 {
     // Ein Datenpunkt ist ein Wertepaar: Position auf der m/z-Achse und Intensität.
@@ -10,6 +12,12 @@ namespace MassSpecSim
         {
             MassToCharge = massToCharge;
             Intensity = intensity;
+        }
+
+        public override string ToString()
+        {
+
+            return "("+MassToCharge+"m/z; "+Intensity+ "cps)";
         }
     }
 }

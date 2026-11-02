@@ -8,7 +8,7 @@ namespace MassSpecSim
     {
         public double MinimumMass { get; set; } = 100;
         public double MaximumMass { get; set; } = 104;
-        public int PointCount { get; set; } = 5;
+        public int PointCount { get; set; } = 17;
         public double PeakPosition { get; set; } = 300;
         public double PeakHeight { get; set; } = 1000;
         public double PeakWidth { get; set; } = 5;
