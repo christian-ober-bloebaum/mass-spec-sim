@@ -34,16 +34,7 @@ namespace MassSpecSim
             }
             return result;
         }
-        public List<PeakDefinition> peaks = new List<PeakDefinition>()
-        {
-
-
-
-
-
         
-        
-        };
 
         public List<MeasurementPoint> Generate(SimulationSettings settings)
         {
